@@ -33,9 +33,11 @@ RUN curl -sSL https://sdk.cloud.google.com | bash
 
 
 # Install kube-automate tools 
-RUN git clone https://spobvokd1001.indusval.com.br/root/templates-utils.git && \
-  cd templates-utils && \
-  /bin/bash setup.sh 
+RUN export GIT_SSL_NO_VERIFY=1 && \
+    git clone https://spobvokd1001.indusval.com.br/root/templates-utils.git && \
+     cd templates-utils && \
+     /bin/bash setup.sh
+
 
 
 # Configure runtime
