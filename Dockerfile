@@ -29,15 +29,14 @@ RUN curl -LO https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_li
 RUN curl -sSL https://sdk.cloud.google.com | bash
 RUN mv /home/jenkins/google-cloud-sdk /usr/local/google-cloud-sdk
 
-
-
 # Install kube-automate tools 
 RUN export GIT_SSL_NO_VERIFY=1 && \
     git clone https://spobvokd1001.indusval.com.br/root/templates-utils.git && \
      cd templates-utils && \
      /bin/bash setup.sh
 
-
+# Install python tools
+RUN apt-get update && apt-get install -y python-pip git python
 
 # Configure runtime
 COPY docker-entrypoint.sh /usr/local/bin/
