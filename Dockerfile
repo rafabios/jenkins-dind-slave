@@ -36,7 +36,7 @@ RUN export GIT_SSL_NO_VERIFY=1 && \
      /bin/bash setup.sh
 
 # Install python tools
-RUN apt-get update && apt-get install -y git python python-yaml && pip install python-consul pyyaml
+RUN apt-get update && apt-get install -y git python && pip install python-consul pyyaml
 
 # Configure runtime
 COPY docker-entrypoint.sh /usr/local/bin/
