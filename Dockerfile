@@ -25,11 +25,10 @@ RUN curl -LO https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_li
   && chmod +x ./terraform \
   && mv terraform /usr/local/bin/terraform
 
-# Install python tools
-RUN apt-get update && apt-get install -y python-pip git python 
-
 # Install gcloud SDK
 RUN curl -sSL https://sdk.cloud.google.com | bash
+RUN mv /home/jenkins/google-cloud-sdk /usr/local/google-cloud-sdk
+
 
 
 # Install kube-automate tools 
@@ -42,10 +41,10 @@ RUN export GIT_SSL_NO_VERIFY=1 && \
 
 # Configure runtime
 COPY docker-entrypoint.sh /usr/local/bin/
-#COPY jenkins-slave /usr/local/bin/jenkins-slave
+COPY jenkins-slave /usr/local/bin/jenkins-slave
 
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-#RUN chmod +x /usr/local/bin/jenkins-slave
+RUN chmod +x /usr/local/bin/jenkins-slave
 
 ENV PATH="/usr/local/google-cloud-sdk/bin:$PATH"
 ENTRYPOINT docker-entrypoint.sh; jenkins-slave
